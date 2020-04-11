@@ -1,0 +1,33 @@
+###### I plan to use Python instead of Matlab for all the labs in this course, so you should run this code in Python. I chose to track the ISS which has an inclination of 51.64 degrees (included in the code below) and a period of 92.68 minutes. I believe in lecture you mentioned that a .txt file is a fine way to submit our code, but please let me know if there's any better way (my email is mjspragu@ucsd.edu). I'm also submitting separately a picture of the plot that this code generates. 
+
+import numpy
+from numpy import pi, sin, cos, arcsin, arctan2, linspace
+%matplotlib inline
+import matplotlib.pyplot as plt 
+import cartopy.crs as ccrs
+
+## set variables 
+w_e = 2*pi/86164.1;
+# set t to be a vector (in seconds) that spans 10 days, in 100-second time steps
+t = linspace(0, 86400, 86400)
+# period of ISS is 92.68 minutes
+w_s = 2*pi/(92.68*60);
+# inclination = 51.64 degrees
+i = 51.64 * pi/180;
+
+## set equations 
+lat_rad = arcsin(sin(w_s*t)*sin(i));
+# for a longer equation, separate numerator/denominator of arctan function for simplicity
+tan_num = -sin(w_e*t)*cos(w_s*t) + cos(w_e*t)*sin(w_s*t)*cos(i);
+tan_denom = cos(w_e*t)*cos(w_s*t) + sin(w_e*t)*sin(w_s*t)*cos(i);
+lon_rad = arctan2(tan_num,tan_denom)
+# convert lat, lon output into degrees
+lat_deg = lat_rad*180/pi;
+lon_deg = lon_rad*180/pi; 
+
+## create plots 
+plt.figure(figsize=(10,10))
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.stock_img()
+plt.plot(lon_deg, lat_deg, '.', c = 'red', markersize=0.5)
+plt.show()
