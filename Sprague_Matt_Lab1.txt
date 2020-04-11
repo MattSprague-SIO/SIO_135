@@ -1,4 +1,4 @@
-###### I plan to use Python instead of Matlab for all the labs in this course, so you should run this code in Python. I chose to track the ISS which has an inclination of 51.64 degrees (included in the code below) and a period of 92.68 minutes. I believe in lecture you mentioned that a .txt file is a fine way to submit our code, but please let me know if there's any better way (my email is mjspragu@ucsd.edu). I'm also submitting separately a picture of the plot that this code generates. 
+#plotting the orbital trajectory of the ISS 
 
 import numpy
 from numpy import pi, sin, cos, arcsin, arctan2, linspace
